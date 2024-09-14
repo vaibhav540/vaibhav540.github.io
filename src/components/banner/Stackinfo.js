@@ -26,28 +26,31 @@ const Stackinfo = () => {
   });
 
   return (
-    <div id="first-box" className="w-1/2 flex flex-col gap-20">
+    <div
+      id="first-box"
+      className="w-full md:w-1/2 flex flex-col gap-10 md:gap-20"
+    >
       <div className="flex flex-col gap-5">
-        <h4 className="text-lg font-normal">WELCOME TO MY WORLD</h4>
-        <h1 className="text-5xl font-bold text-white">
+        <h4 className="text-sm md:text-lg font-normal">WELCOME TO MY WORLD</h4>
+        <h1 className="text-4xl md:text-5xl font-bold text-white">
           Hi I'm{" "}
           <span className="text-designColor capitalize">Vaibhav More</span>
         </h1>
-        <h2 className="text-4xl font-bold text-white">
+        <h2 className="text-2xl md:text-4xl font-bold text-white">
           a<span> {text}</span>
           <Cursor cursorBlinking="true" cursorStyle="|" cursorColor="#ff014f" />
         </h2>
 
-        <p className="text-base font-bodyFont leading-6 tracking-wide">
+        <p className="text-sm md:text-base font-bodyFont leading-6 tracking-wide">
           I am a passionate and skilled developer. With a strong foundation in
           software development principles, I am dedicated to creating efficient,
           scalable, and user-friendly solutions. I thrive in collaborative
           environments and enjoy taking on new challenges.
         </p>
       </div>
-      <div className="flex justify-between">
+      <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-0">
         <div>
-          <h2 className="text-base uppercase font-titleFont mb-4">
+          <h2 className="text-sm md:text-base uppercase font-titleFont mb-4">
             Find me in
           </h2>
           <div className="flex gap-4">
@@ -84,7 +87,7 @@ const Stackinfo = () => {
           </div>
         </div>
         <div>
-          <h2 className="text-base uppercase font-titleFont mb-4">
+          <h2 className="text-sm md:text-base uppercase font-titleFont mb-4">
             BEST SKILL ON
           </h2>
           <div className="flex gap-4">

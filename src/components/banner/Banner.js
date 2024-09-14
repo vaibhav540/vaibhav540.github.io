@@ -6,7 +6,7 @@ const Banner = () => {
   return (
     <section
       id="home"
-      className="w-full pt-10 pb-20 flex font-titleFont items-center border-b-black border-b-[1px]"
+      className="w-full pt-10 pb-20 flex flex-col md:flex-row font-titleFont items-center border-b-black border-b-[1px]"
     >
       <Stackinfo />
       <BannerLogo />

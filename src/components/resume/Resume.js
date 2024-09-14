@@ -4,101 +4,70 @@ import Skills from "./Skills";
 import Achievement from "./Achievement";
 import Experience from "./Experience";
 import Title from "./../shared/Title";
-import ResumeCard from "./ResumeCard"; // Assuming this is a component used elsewhere
 import { FaDownload } from "react-icons/fa"; // Importing an icon for the download button
+import classNames from "classnames"; // Import classNames utility
+import HamburgerMenu from "../HamburgerMenu"; // Adjust the path based on your file structure
 
 const Resume = () => {
-  const [educationData, setEducationData] = useState(true);
-  const [skillData, setSkillData] = useState(false);
-  const [experienceData, setExperienceData] = useState(false);
-  const [achievementData, setAchievementData] = useState(false);
+  const [activeSection, setActiveSection] = useState("education");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <section id="resume" className="w-full border-b-[1px] border-b-black">
-      <div className="flex justify-center my-20 items-center text-center">
+    <section
+      id="resume"
+      className="w-full border-b-[1px] border-b-black relative"
+    >
+      <div className="flex flex-col items-center my-20 text-center">
         <Title title="7+ YEARS OF EXPERIENCE" description="My Resume" />
-      </div>
 
-      {/* Download CV Button */}
-      <div className="flex justify-center mb-10">
-        <a
-          href="https://drive.google.com/file/d/190HB-78XCEY985HDEGhEcvJh3A94MEqA/view?usp=sharing"
-          target="_blank"
-          rel="noreferrer"
-          className="flex items-center bg-designColor text-white px-6 py-2 rounded-lg hover:bg-darkDesignColor transition duration-300"
-        >
-          <FaDownload className="mr-2" />
-          Download CV
-        </a>
-      </div>
+        {/* Hamburger Menu */}
+        <HamburgerMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
-      <div>
-        <ul className="w-full grid grid-cols-4">
-          <li
-            onClick={() =>
-              setEducationData(true) &
-              setSkillData(false) &
-              setExperienceData(false) &
-              setAchievementData(false)
-            }
-            className={` ${
-              educationData
-                ? "border-designColor rounded-lg"
-                : "border-transparent"
-            } resume`}
+        {/* Download CV Button */}
+        <div className="flex justify-center mb-10 mt-6">
+          {" "}
+          {/* Added mt-6 for top margin */}
+          <a
+            href="https://drive.google.com/file/d/190HB-78XCEY985HDEGhEcvJh3A94MEqA/view?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center bg-designColor text-white px-6 py-2 rounded-lg hover:bg-darkDesignColor transition duration-300"
           >
-            Education
-          </li>
-          <li
-            onClick={() =>
-              setEducationData(false) &
-              setSkillData(true) &
-              setExperienceData(false) &
-              setAchievementData(false)
-            }
-            className={` ${
-              skillData ? "border-designColor rounded-lg" : "border-transparent"
-            } resume`}
-          >
-            Professional Skills
-          </li>
-          <li
-            onClick={() =>
-              setEducationData(false) &
-              setSkillData(false) &
-              setExperienceData(true) &
-              setAchievementData(false)
-            }
-            className={` ${
-              experienceData
-                ? "border-designColor rounded-lg"
-                : "border-transparent"
-            } resume`}
-          >
-            Experience
-          </li>
-          <li
-            onClick={() =>
-              setEducationData(false) &
-              setSkillData(false) &
-              setExperienceData(false) &
-              setAchievementData(true)
-            }
-            className={` ${
-              achievementData
-                ? "border-designColor rounded-lg"
-                : "border-transparent"
-            } resume`}
-          >
-            Achievements
-          </li>
-        </ul>
-      </div>
+            <FaDownload className="mr-2" />
+            Download CV
+          </a>
+        </div>
 
-      {educationData && <Education />}
-      {skillData && <Skills />}
-      {experienceData && <Experience />}
-      {achievementData && <Achievement />}
+        {/* Navigation Tabs for Large Screens */}
+        <div className="hidden lg:flex justify-center mb-8">
+          <ul className="w-full grid grid-cols-4 gap-4">
+            {["education", "skills", "experience", "achievements"].map(
+              (section) => (
+                <li
+                  key={section}
+                  onClick={() => setActiveSection(section)}
+                  className={classNames(
+                    "cursor-pointer py-2 px-4 text-center border-2 transition duration-300",
+                    {
+                      "border-designColor rounded-lg":
+                        activeSection === section,
+                      "border-transparent": activeSection !== section,
+                    }
+                  )}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+
+        {/* Conditional Rendering of Sections */}
+        {activeSection === "education" && <Education />}
+        {activeSection === "skills" && <Skills />}
+        {activeSection === "experience" && <Experience />}
+        {activeSection === "achievements" && <Achievement />}
+      </div>
     </section>
   );
 };
